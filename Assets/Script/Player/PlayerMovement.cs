@@ -32,15 +32,18 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-
-
-
         Vector3 move = new Vector3(x, 0f, z).normalized;
         rb.linearVelocity = new Vector3(move.x * PlayerSpeed, rb.linearVelocity.y, move.z * PlayerSpeed);
+
+        PlayerSpeed = Mathf.Clamp(PlayerSpeed, 1.5f, 2.5f);
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
             PlayerSpeed *= PlayerRunning;
+        }
+        else
+        {
+            PlayerSpeed = 1.5f;
         }
     }
 }
