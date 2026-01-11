@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
     public float PlayerRunning = 2f;
     public float PlayerJump = 10f;
     [SerializeField]private float currentSpeed;
-
     public Transform cameraTransform;
 
     private Rigidbody rb;
@@ -33,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         {
             currentSpeed = PlayerSpeed;
         }
+        
     }
 
     void FixedUpdate()
@@ -40,8 +40,11 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        Vector3 move = new Vector3(x, 0f, z).normalized;
+        rb.transform.rotation = Quaternion.Euler(0f, cameraTransform.eulerAngles.y, 0f);
+        Vector3 move = (transform.forward * z) + (transform.right * x);
+        move = move.normalized;
+        
         rb.linearVelocity = new Vector3(move.x * currentSpeed, rb.linearVelocity.y, move.z * currentSpeed);
-
     }
+
 }
