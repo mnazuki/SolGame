@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     public float PlayerSpeed = 1.5f;
     public float PlayerRunning = 2f;
     public float PlayerJump = 10f;
+    [SerializeField]private float currentSpeed;
 
     public Transform cameraTransform;
 
@@ -24,7 +25,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       if (Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed = PlayerSpeed * PlayerRunning;
+        }
+        else
+        {
+            currentSpeed = PlayerSpeed;
+        }
     }
 
     void FixedUpdate()
@@ -33,17 +41,7 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxisRaw("Vertical");
 
         Vector3 move = new Vector3(x, 0f, z).normalized;
-        rb.linearVelocity = new Vector3(move.x * PlayerSpeed, rb.linearVelocity.y, move.z * PlayerSpeed);
+        rb.linearVelocity = new Vector3(move.x * currentSpeed, rb.linearVelocity.y, move.z * currentSpeed);
 
-        PlayerSpeed = Mathf.Clamp(PlayerSpeed, 1.5f, 2.5f);
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            PlayerSpeed *= PlayerRunning;
-        }
-        else
-        {
-            PlayerSpeed = 1.5f;
-        }
     }
 }

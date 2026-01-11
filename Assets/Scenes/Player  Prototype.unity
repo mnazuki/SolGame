@@ -857,8 +857,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   PlayerSpeed: 1.5
-  PlayerRunning: 2
+  PlayerRunning: 5
   PlayerJump: 10
+  currentSpeed: 0
   cameraTransform: {fileID: 0}
 --- !u!54 &1573690222
 Rigidbody:
