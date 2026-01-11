@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    enum PlayerState { Idle, Walking, Running, Grounded }
+
+    PlayerState state;
+
     public float PlayerSpeed = 1.5f;
     public float PlayerRunning = 2f;
     public float PlayerJump = 10f;
@@ -24,15 +28,52 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKey(KeyCode.LeftShift))
+        UpdateState();  
+        print(state);
+    }
+
+    void UpdateState()
+    {
+        switch (state)
         {
-            currentSpeed = PlayerSpeed * PlayerRunning;
+            case PlayerState.Idle:
+                if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+                {
+                    state = PlayerState.Walking;
+                }
+                break;
+            case PlayerState.Walking:
+                if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+                {
+                    state = PlayerState.Idle;
+                    currentSpeed = PlayerSpeed;
+                }
+                else if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    state = PlayerState.Running;
+                    currentSpeed = PlayerSpeed * PlayerRunning;
+                }
+                else
+                {
+                    currentSpeed = PlayerSpeed;
+                }
+                break;
+            case PlayerState.Running:
+                if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+                {
+                    state = PlayerState.Idle;
+                    currentSpeed = PlayerSpeed;
+                }
+                else if (!Input.GetKey(KeyCode.LeftShift))
+                {
+                    state = PlayerState.Walking;
+                    currentSpeed = PlayerSpeed;
+                }
+                break;
+            case PlayerState.Grounded:
+                // Grounded logic can be added here
+                break;
         }
-        else
-        {
-            currentSpeed = PlayerSpeed;
-        }
-        
     }
 
     void FixedUpdate()
