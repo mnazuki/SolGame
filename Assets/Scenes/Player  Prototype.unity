@@ -124,6 +124,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 97ada40f57d401540b8eafeeba1f0e9c, type: 3}
   m_PrefabInstance: {fileID: 601646332}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &303972280 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 97ada40f57d401540b8eafeeba1f0e9c, type: 3}
+  m_PrefabInstance: {fileID: 601646332}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &303972281 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 97ada40f57d401540b8eafeeba1f0e9c, type: 3}
@@ -146,6 +151,7 @@ MonoBehaviour:
   PlayerJump: 10
   currentSpeed: 0
   cameraTransform: {fileID: 1561142930}
+  animator: {fileID: 303972280}
 --- !u!54 &303972283
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -555,6 +561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armature
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 97ada40f57d401540b8eafeeba1f0e9c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23824ccaf081035458a2ccd285df47fc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1017,6 +1027,7 @@ MonoBehaviour:
   PlayerJump: 10
   currentSpeed: 0
   cameraTransform: {fileID: 1561142930}
+  animator: {fileID: 0}
 --- !u!54 &1573690222
 Rigidbody:
   m_ObjectHideFlags: 0
